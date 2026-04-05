@@ -58,10 +58,13 @@ class PromptService:
             else "Choose an appropriate color palette."
         )
 
-        field_keys = "\n".join(
-            f'  "{f.key}": ""'
+        lines = [
+            f'  "{f.key}": ""  // {f.hint}'
+            if f.hint
+            else f'  "{f.key}": ""'
             for f in template.fields
-        )
+        ]
+        field_keys = ",\n".join(lines)
 
         return (
             f'User description: "{request.user_description}"\n'
@@ -85,7 +88,11 @@ class PromptService:
                 f"LLM response missing fields: {missing}\n\nReceived: {list(data.keys())}"
             )
 
-        return {f.key: str(data[f.key]) for f in template.fields}
+        # Sanitize values: escape curly braces to prevent str.format() injection
+        return {
+            f.key: str(data[f.key]).replace("{", "{{").replace("}", "}}")
+            for f in template.fields
+        }
 
     def _assemble_prompt(
         self,

@@ -110,3 +110,65 @@ def test_raises_when_template_not_found(niji_template, basic_request):
     svc = PromptService(template_svc, llm_svc)
     with pytest.raises(TemplateNotFoundError):
         svc.generate(basic_request)
+
+
+# ── Field hint injection ──────────────────────────────────────────────────────
+
+def test_user_message_includes_field_hints(niji_template, mock_llm_response, basic_request):
+    """user_message should contain hint text as inline comments for each field."""
+    template_svc = MagicMock()
+    template_svc.load.return_value = niji_template
+    llm_svc = MagicMock()
+    llm_svc.complete.return_value = mock_llm_response
+
+    svc = PromptService(template_svc, llm_svc)
+    svc.generate(basic_request)
+
+    user_message = llm_svc.complete.call_args[0][1]
+    # The 'lighting' field has hint: "e.g. golden hour backlight, rim lighting, volumetric rays"
+    assert "golden hour backlight" in user_message
+
+
+def test_user_message_omits_hint_comment_when_empty(mock_llm_response, basic_request):
+    """When a field has no hint, its line in user_message must not contain '//'."""
+    import copy
+    from src.models.template import TemplateDefinition
+
+    # Load the real template and clear one field's hint
+    import json
+    from pathlib import Path
+
+    raw = json.loads(
+        (Path(__file__).parent.parent.parent / "templates" / "niji-anime.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    # Clear the hint for 'lighting' specifically
+    for field in raw["fields"]:
+        if field["key"] == "lighting":
+            field["hint"] = ""
+    no_hint_template = TemplateDefinition(**raw)
+
+    template_svc = MagicMock()
+    template_svc.load.return_value = no_hint_template
+    llm_svc = MagicMock()
+    llm_svc.complete.return_value = mock_llm_response
+
+    svc = PromptService(template_svc, llm_svc)
+    svc.generate(basic_request)
+
+    user_message = llm_svc.complete.call_args[0][1]
+    # Find the line corresponding to 'lighting' and assert no '//' comment
+    lighting_line = next(
+        (line for line in user_message.splitlines() if '"lighting"' in line), None
+    )
+    assert lighting_line is not None, "Expected a line with 'lighting' key in user_message"
+    assert "//" not in lighting_line
+
+
+# ── system_prompt content ─────────────────────────────────────────────────────
+
+def test_system_prompt_contains_creative_freedom_instruction(niji_template):
+    """system_prompt must include the adaptive creative-freedom instructions."""
+    assert "creative freedom" in niji_template.system_prompt
+    assert "faithfully translate" in niji_template.system_prompt

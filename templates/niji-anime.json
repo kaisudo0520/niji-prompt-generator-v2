@@ -65,15 +65,15 @@
   ],
   "fields": [
     { "key": "character_and_shot",     "label": "人物與鏡頭",       "hint": "e.g. 1girl, upper body, looking at viewer" },
-    { "key": "outfit_and_accessories", "label": "服裝與配件" },
-    { "key": "hair_and_eyes",          "label": "髮色與瞳色" },
-    { "key": "expression_and_action",  "label": "表情與動作" },
-    { "key": "color_palette",          "label": "主色調 / 光芒色彩" },
-    { "key": "lighting",               "label": "打光類型" },
-    { "key": "scene_and_atmosphere",   "label": "場景與氛圍" },
-    { "key": "composition",            "label": "構圖修飾" }
+    { "key": "outfit_and_accessories", "label": "服裝與配件",       "hint": "e.g. flowing white dress with gold embroidery, crystal tiara, feathered earrings" },
+    { "key": "hair_and_eyes",          "label": "髮色與瞳色",       "hint": "e.g. long silver hair with braids, heterochromia blue and gold eyes" },
+    { "key": "expression_and_action",  "label": "表情與動作",       "hint": "e.g. gentle smile, reaching out hand, wind blowing hair" },
+    { "key": "color_palette",          "label": "主色調 / 光芒色彩", "hint": "e.g. soft pink and gold tones, warm highlights, pastel accents" },
+    { "key": "lighting",               "label": "打光類型",         "hint": "e.g. golden hour backlight, rim lighting, volumetric rays" },
+    { "key": "scene_and_atmosphere",   "label": "場景與氛圍",       "hint": "e.g. floating cherry blossoms, ancient temple courtyard, misty morning" },
+    { "key": "composition",            "label": "構圖修飾",         "hint": "e.g. rule of thirds, shallow depth of field, cinematic framing" }
   ],
-  "system_prompt": "You are an expert Midjourney prompt engineer specializing in anime (niji) style.\nExpand the user's brief description into specific, vivid English prompt segments.\nEach segment must be concrete and visual — avoid vague mood words.\nOutput ONLY valid JSON with the exact keys listed, no other text.",
+  "system_prompt": "You are an expert Midjourney prompt engineer specializing in anime (niji) style.\nExpand the user's brief description into specific, vivid English prompt segments.\nEach segment must be concrete and visual — avoid vague mood words.\n\nAdapt your creative freedom to the level of detail the user provides:\n- If the description is vague or minimal (e.g. just a character concept), you have FULL creative freedom — invent appearance, outfit, pose, expression, scene, lighting, and composition that form a coherent, visually striking image.\n- If the description is moderately detailed, preserve the user's intent and fill in only the unspecified dimensions creatively.\n- If the description is highly detailed, faithfully translate it into Midjourney-compatible English phrases with minimal invention — respect every detail the user specified.\n\nFor EVERY field, output 2-5 concrete, comma-separated phrases in Midjourney syntax. Never leave a field vague or generic. Never repeat the user's raw input verbatim — always transform it into vivid visual language.\n\nOutput ONLY valid JSON with the exact keys listed, no other text.",
   "output_template": "{character_and_shot}, {outfit_and_accessories}, {hair_and_eyes}, {expression_and_action}, {color_palette}, {lighting}, luminous brushwork, use of light and shadow, {scene_and_atmosphere}, {artist_ref}, official art, anime aesthetic, {composition}",
   "fixed_suffix": "--ar {aspect_ratio} --niji 7 --s 750"
 }
