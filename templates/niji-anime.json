@@ -1,0 +1,79 @@
+{
+  "id": "niji-anime",
+  "name": "Niji Anime",
+  "description": "生成 Midjourney niji 7 動漫風格提示詞，支援繪師風格參考",
+  "icon": "🎨",
+  "user_inputs": [
+    {
+      "type": "multi_select_cards",
+      "id": "artists",
+      "label": "參考繪師（1~2 名）",
+      "max_selections": 2,
+      "options": [
+        { "value": "RURUDO",       "label": "RURUDO",                  "description": "細膩線條、淡雅色彩、夢幻感" },
+        { "value": "kousaki rui",  "label": "kousaki rui（光崎琉衣）",  "description": "柔和粉彩、少女感、花卉裝飾" },
+        { "value": "Anmi",         "label": "Anmi",                    "description": "鮮豔配色、活潑表情、動感構圖" },
+        { "value": "Lake",         "label": "Lake",                    "description": "精緻珠寶感、光澤質感、華麗服裝" },
+        { "value": "Liduke",       "label": "Liduke",                  "description": "獨特眼神、神秘氛圍、複雜細節" }
+      ]
+    },
+    {
+      "type": "single_select_pills",
+      "id": "aspect_ratio",
+      "label": "圖像比例",
+      "default": "9:16",
+      "options": [
+        { "value": "16:9", "label": "16:9" },
+        { "value": "1:1",  "label": "1:1"  },
+        { "value": "4:3",  "label": "4:3"  },
+        { "value": "3:4",  "label": "3:4"  },
+        { "value": "9:16", "label": "9:16" }
+      ]
+    },
+    {
+      "type": "category_select",
+      "id": "color_palette",
+      "label": "主色調 / 光芒色彩",
+      "allow_empty": true,
+      "empty_label": "讓 LLM 決定",
+      "categories": [
+        {
+          "label": "夢幻 / 華麗",
+          "options": [
+            { "value": "pink and gold",          "label": "粉與金" },
+            { "value": "rainbow-colored petals", "label": "彩虹色花瓣" }
+          ]
+        },
+        {
+          "label": "神祕 / 暗黑",
+          "options": [
+            { "value": "dark gray and light black", "label": "深灰與淺黑" },
+            { "value": "dark bronze and red",       "label": "深古銅與紅" },
+            { "value": "stark black and white",     "label": "強烈的黑白" }
+          ]
+        },
+        {
+          "label": "憂鬱 / 氣氛",
+          "options": [
+            { "value": "light bronze and blue", "label": "淺古銅與藍" },
+            { "value": "dark orange and white", "label": "深橘與白"   },
+            { "value": "dark gray and red",     "label": "深灰與紅"   }
+          ]
+        }
+      ]
+    }
+  ],
+  "fields": [
+    { "key": "character_and_shot",     "label": "人物與鏡頭",       "hint": "e.g. 1girl, upper body, looking at viewer" },
+    { "key": "outfit_and_accessories", "label": "服裝與配件" },
+    { "key": "hair_and_eyes",          "label": "髮色與瞳色" },
+    { "key": "expression_and_action",  "label": "表情與動作" },
+    { "key": "color_palette",          "label": "主色調 / 光芒色彩" },
+    { "key": "lighting",               "label": "打光類型" },
+    { "key": "scene_and_atmosphere",   "label": "場景與氛圍" },
+    { "key": "composition",            "label": "構圖修飾" }
+  ],
+  "system_prompt": "You are an expert Midjourney prompt engineer specializing in anime (niji) style.\nExpand the user's brief description into specific, vivid English prompt segments.\nEach segment must be concrete and visual — avoid vague mood words.\nOutput ONLY valid JSON with the exact keys listed, no other text.",
+  "output_template": "{character_and_shot}, {outfit_and_accessories}, {hair_and_eyes}, {expression_and_action}, {color_palette}, {lighting}, luminous brushwork, use of light and shadow, {scene_and_atmosphere}, {artist_ref}, official art, anime aesthetic, {composition}",
+  "fixed_suffix": "--ar {aspect_ratio} --niji 7 --s 750"
+}
