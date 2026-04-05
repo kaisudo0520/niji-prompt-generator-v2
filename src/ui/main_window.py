@@ -306,9 +306,10 @@ class MainWindow(QMainWindow):
             return
 
         self._set_loading(True)
+        self._cleanup_worker()
 
         self._worker = GenerateWorker(self._prompt_service, request, parent=self)
-        self._worker.finished.connect(self._on_finished)
+        self._worker.result_ready.connect(self._on_finished)
         self._worker.error.connect(self._on_error)
         self._worker.start()
 
@@ -323,6 +324,16 @@ class MainWindow(QMainWindow):
         self._set_loading(False)
         self._prompt_output.display_error(message)
         QMessageBox.critical(self, "生成失敗", message)
+
+    def _cleanup_worker(self) -> None:
+        """Disconnect and schedule deletion of the previous worker, if any."""
+        if self._worker is not None:
+            self._worker.result_ready.disconnect()
+            self._worker.error.disconnect()
+            self._worker.quit()
+            self._worker.wait(3000)  # wait up to 3 s for graceful stop
+            self._worker.deleteLater()
+            self._worker = None
 
     # ── Loading state ────────────────────────────────────────────────────────
 

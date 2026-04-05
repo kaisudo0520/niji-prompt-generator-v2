@@ -29,6 +29,11 @@ class LLMService:
             "HTTP-Referer": "https://github.com/niji-prompt-generator",
             "X-Title": "Niji Prompt Generator",
         }
+        self._client = httpx.Client(timeout=60.0, headers=self._headers)
+
+    def close(self) -> None:
+        """Close the underlying HTTP client. Call on application shutdown."""
+        self._client.close()
 
     def complete(self, system_prompt: str, user_message: str) -> str:
         """
@@ -49,12 +54,10 @@ class LLMService:
         logger.debug("LLM request model=%s", self._config.active_model)
 
         try:
-            with httpx.Client(timeout=60.0) as client:
-                resp = client.post(
-                    f"{self._config.base_url}/chat/completions",
-                    headers=self._headers,
-                    json=payload,
-                )
+            resp = self._client.post(
+                f"{self._config.base_url}/chat/completions",
+                json=payload,
+            )
         except httpx.TimeoutException:
             raise LLMError("Request timed out (60 s). Please try again.")
         except httpx.RequestError as exc:

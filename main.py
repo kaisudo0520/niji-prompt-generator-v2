@@ -11,6 +11,9 @@ from PySide6.QtWidgets import QApplication, QMessageBox
 from src.ui.styles.theme import STYLESHEET
 
 
+_ROOT = Path(__file__).resolve().parent
+
+
 def main() -> None:
     app = QApplication(sys.argv)
     app.setApplicationName("Niji Prompt Generator")
@@ -19,7 +22,7 @@ def main() -> None:
     # Load .env if present
     try:
         from dotenv import load_dotenv
-        load_dotenv()
+        load_dotenv(_ROOT / ".env")
     except ImportError:
         pass
 
@@ -39,10 +42,10 @@ def main() -> None:
         from src.services.prompt_service import PromptService
         from src.config.llm_config_loader import load_llm_config
 
-        llm_config      = load_llm_config(Path("config/llm_config.json"))
-        template_service = TemplateService(Path("templates"))
-        llm_service     = LLMService(llm_config, api_key)
-        prompt_service  = PromptService(template_service, llm_service)
+        llm_config       = load_llm_config(_ROOT / "config" / "llm_config.json")
+        template_service = TemplateService(_ROOT / "templates")
+        llm_service      = LLMService(llm_config, api_key)
+        prompt_service   = PromptService(template_service, llm_service)
 
     except Exception as exc:
         QMessageBox.critical(None, "初始化失敗", str(exc))

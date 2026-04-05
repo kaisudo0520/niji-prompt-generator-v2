@@ -1,11 +1,14 @@
 """Request / Response models for the generate pipeline."""
+from typing import Union
+
 from pydantic import BaseModel
 
 
 class GenerateRequest(BaseModel):
     template_id: str
     user_description: str
-    user_inputs: dict[str, object]  # key = UserInputDef.id
+    # key = UserInputDef.id; values: list[str] (artists), str (aspect_ratio, color_palette)
+    user_inputs: dict[str, Union[str, list[str]]]
 
 
 class GenerateResponse(BaseModel):
