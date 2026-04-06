@@ -31,6 +31,13 @@
       ]
     },
     {
+      "type": "text_input",
+      "id": "title_reference",
+      "label": "標題 / 歌名 / 專輯名（選填）",
+      "placeholder": "例：夜に駆ける、Violet Evergarden、花の塔",
+      "required": false
+    },
+    {
       "type": "category_select",
       "id": "color_palette",
       "label": "主色調 / 光芒色彩",
@@ -41,7 +48,9 @@
           "label": "夢幻 / 華麗",
           "options": [
             { "value": "pink and gold",          "label": "粉與金" },
-            { "value": "rainbow-colored petals", "label": "彩虹色花瓣" }
+            { "value": "rainbow-colored petals", "label": "彩虹色花瓣" },
+            { "value": "pearl white and rose pink", "label": "珍珠白與玫瑰粉" },
+            { "value": "champagne and lavender",    "label": "香檳與薰衣草" }
           ]
         },
         {
@@ -49,7 +58,9 @@
           "options": [
             { "value": "dark gray and light black", "label": "深灰與淺黑" },
             { "value": "dark bronze and red",       "label": "深古銅與紅" },
-            { "value": "stark black and white",     "label": "強烈的黑白" }
+            { "value": "stark black and white",     "label": "強烈的黑白" },
+            { "value": "deep indigo and silver",    "label": "深靛與銀" },
+            { "value": "midnight purple and crimson","label": "午夜紫與暗紅" }
           ]
         },
         {
@@ -57,23 +68,40 @@
           "options": [
             { "value": "light bronze and blue", "label": "淺古銅與藍" },
             { "value": "dark orange and white", "label": "深橘與白"   },
-            { "value": "dark gray and red",     "label": "深灰與紅"   }
+            { "value": "dark gray and red",     "label": "深灰與紅"   },
+            { "value": "faded teal and ash",    "label": "褪色青與灰" }
+          ]
+        },
+        {
+          "label": "清新 / 柔和",
+          "options": [
+            { "value": "mint green and cream",   "label": "薄荷綠與奶油" },
+            { "value": "sky blue and peach",     "label": "天空藍與蜜桃" },
+            { "value": "soft lilac and white",   "label": "淡紫丁香與白" }
+          ]
+        },
+        {
+          "label": "熱血 / 鮮豔",
+          "options": [
+            { "value": "crimson and gold",           "label": "深紅與金" },
+            { "value": "electric blue and magenta",  "label": "電藍與洋紅" },
+            { "value": "sunset orange and violet",   "label": "落日橘與紫" }
           ]
         }
       ]
     }
   ],
   "fields": [
-    { "key": "character_and_shot",     "label": "人物與鏡頭",       "hint": "e.g. 1girl, upper body, looking at viewer" },
-    { "key": "outfit_and_accessories", "label": "服裝與配件",       "hint": "e.g. flowing white dress with gold embroidery, crystal tiara, feathered earrings" },
-    { "key": "hair_and_eyes",          "label": "髮色與瞳色",       "hint": "e.g. long silver hair with braids, heterochromia blue and gold eyes" },
-    { "key": "expression_and_action",  "label": "表情與動作",       "hint": "e.g. gentle smile, reaching out hand, wind blowing hair" },
-    { "key": "color_palette",          "label": "主色調 / 光芒色彩", "hint": "e.g. soft pink and gold tones, warm highlights, pastel accents" },
-    { "key": "lighting",               "label": "打光類型",         "hint": "e.g. golden hour backlight, rim lighting, volumetric rays" },
-    { "key": "scene_and_atmosphere",   "label": "場景與氛圍",       "hint": "e.g. floating cherry blossoms, ancient temple courtyard, misty morning" },
-    { "key": "composition",            "label": "構圖修飾",         "hint": "e.g. rule of thirds, shallow depth of field, cinematic framing" }
+    { "key": "character_and_shot",     "label": "人物與鏡頭",       "hint": "Character identity and shot type: e.g. 1girl, shishiro botan, hololive, upper body" },
+    { "key": "outfit_and_accessories", "label": "服裝與配件",       "hint": "Describe outfit in detail: e.g. white sundress, straw hat, silver pendant necklace" },
+    { "key": "hair_and_eyes",          "label": "髮色與瞳色",       "hint": "Hair and eye details: e.g. long silver hair with side braid, bright green eyes" },
+    { "key": "expression_and_action",  "label": "表情與動作",       "hint": "Keep minimal — ONE expression + ONE action max: e.g. gentle smile, hand on chest" },
+    { "key": "color_palette",          "label": "主色調 / 光芒色彩", "hint": "1-2 tones with mood: e.g. warm pink and gold" },
+    { "key": "lighting",               "label": "打光類型",         "hint": "One lighting with intent: e.g. warm golden backlight" },
+    { "key": "scene_and_atmosphere",   "label": "場景與氛圍",       "hint": "Setting + mood, not exhaustive: e.g. neon-lit rooftop at night" },
+    { "key": "composition",            "label": "構圖修飾",         "hint": "One framing guide: e.g. shallow depth of field, cinematic framing" }
   ],
-  "system_prompt": "You are an expert Midjourney prompt engineer specializing in anime (niji) style.\nExpand the user's brief description into specific, vivid English prompt segments.\nEach segment must be concrete and visual — avoid vague mood words.\n\nAdapt your creative freedom to the level of detail the user provides:\n- If the description is vague or minimal (e.g. just a character concept), you have FULL creative freedom — invent appearance, outfit, pose, expression, scene, lighting, and composition that form a coherent, visually striking image.\n- If the description is moderately detailed, preserve the user's intent and fill in only the unspecified dimensions creatively.\n- If the description is highly detailed, faithfully translate it into Midjourney-compatible English phrases with minimal invention — respect every detail the user specified.\n\nFor EVERY field, output 2-5 concrete, comma-separated phrases in Midjourney syntax. Never leave a field vague or generic. Never repeat the user's raw input verbatim — always transform it into vivid visual language.\n\nOutput ONLY valid JSON with the exact keys listed, no other text.",
-  "output_template": "{character_and_shot}, {outfit_and_accessories}, {hair_and_eyes}, {expression_and_action}, {color_palette}, {lighting}, luminous brushwork, use of light and shadow, {scene_and_atmosphere}, {artist_ref}, official art, anime aesthetic, {composition}",
+  "system_prompt": "You are an expert Midjourney prompt engineer specializing in anime (niji) style.\nTranslate the user's description into English prompt segments using Midjourney syntax.\n\nCore principle: CHARACTER DETAIL + COMPOSITIONAL BREATHING ROOM.\n\nDETAILED fields (2-4 vivid phrases OK):\n- character_and_shot: character identity, count, shot type\n- outfit_and_accessories: clothing, accessories, distinctive features — be descriptive\n- hair_and_eyes: hair style/color, eye color/traits — be specific\n\nCONCISE fields (1-2 clear phrases — give direction, not a shot list):\n- expression_and_action: ONE expression + ONE action/pose. Clear and intentional, but do NOT pile on extras.\n  GOOD: \"confident smirk, resting chin on hand\"  BAD: \"smirking, holding a sniper rifle, relaxed posture, looking at viewer\"\n- color_palette: 1-2 color tones that set the mood\n- lighting: ONE clear lighting direction with intent (e.g. \"warm golden backlight\" not just \"backlight\")\n- scene_and_atmosphere: ONE setting + mood phrase. Evocative but not exhaustive.\n  GOOD: \"neon-lit rooftop at night\"  BAD: \"modern rooftop at night, neon city lights background, floating glowing particles\"\n- composition: ONE composition phrase that guides framing\n  GOOD: \"shallow depth of field\"  BAD: \"high contrast, sharp focus, rule of thirds\"\n\nAdapt creative freedom to the user's input:\n- Vague description → invent a cohesive character look, but keep non-character fields sparse.\n- Detailed description → faithfully translate character specifics; still keep composition/scene/action minimal.\n- If a title/song/album reference is provided, use it as creative direction — let the mood, aesthetic, and atmosphere of that work subtly influence your choices (color, lighting, scene) without literally describing the source material.\n\nNever repeat the user's raw input verbatim — transform into Midjourney-compatible English.\n\nOutput ONLY valid JSON with the exact keys listed, no other text.",
+  "output_template": "{character_and_shot}, {outfit_and_accessories}, {hair_and_eyes}, {expression_and_action}, {color_palette}, {lighting}, luminous brushwork, use of light and shadow, detailed hands, {scene_and_atmosphere}, {artist_ref}, official art, anime aesthetic, {composition}",
   "fixed_suffix": "--ar {aspect_ratio} --niji 7 --s 750"
 }

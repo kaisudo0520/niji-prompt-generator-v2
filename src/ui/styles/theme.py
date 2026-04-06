@@ -60,14 +60,30 @@ ARTIST_COLORS: dict[str, str] = {
 # ─────────────────────────────────────────────
 
 COLOR_PREVIEW_MAP: dict[str, str] = {
-    "pink and gold":            "#D4957A",
-    "rainbow-colored petals":   "#B090C8",
-    "dark gray and light black":"#484858",
-    "dark bronze and red":      "#8B4A3A",
-    "stark black and white":    "#909090",
-    "light bronze and blue":    "#5A8090",
-    "dark orange and white":    "#C86020",
-    "dark gray and red":        "#784050",
+    # 夢幻 / 華麗
+    "pink and gold":              "#D4957A",
+    "rainbow-colored petals":     "#B090C8",
+    "pearl white and rose pink":  "#E8B0C0",
+    "champagne and lavender":     "#C0A8D0",
+    # 神祕 / 暗黑
+    "dark gray and light black":  "#484858",
+    "dark bronze and red":        "#8B4A3A",
+    "stark black and white":      "#909090",
+    "deep indigo and silver":     "#4A5080",
+    "midnight purple and crimson":"#6A2848",
+    # 憂鬱 / 氣氛
+    "light bronze and blue":      "#5A8090",
+    "dark orange and white":      "#C86020",
+    "dark gray and red":          "#784050",
+    "faded teal and ash":         "#6A8888",
+    # 清新 / 柔和
+    "mint green and cream":       "#88C8A8",
+    "sky blue and peach":         "#80B0D0",
+    "soft lilac and white":       "#B8A0D0",
+    # 熱血 / 鮮豔
+    "crimson and gold":           "#C83030",
+    "electric blue and magenta":  "#5060E0",
+    "sunset orange and violet":   "#D07030",
 }
 
 
@@ -204,6 +220,27 @@ QTextEdit {{
 
 QTextEdit:focus {{
     border: 1px solid {P.BORDER_FOCUS};
+}}
+
+QLineEdit {{
+    background-color: {P.BG_INPUT};
+    color: {P.TEXT};
+    border: 1px solid {P.BORDER};
+    border-radius: 6px;
+    padding: 5px 10px;
+    font-size: 12px;
+    selection-background-color: {P.ACCENT_DIM};
+    selection-color: {P.TEXT};
+}}
+
+QLineEdit:focus {{
+    border: 1px solid {P.BORDER_FOCUS};
+}}
+
+QLineEdit:disabled {{
+    color: {P.TEXT_DIM};
+    border-color: {P.BORDER_SUBTLE};
+    background-color: {P.BG_SURFACE};
 }}
 
 QTextEdit#promptOutput {{

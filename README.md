@@ -142,3 +142,15 @@ niji-prompt-generator-v2/
 2. 重啟程式，新模板自動載入
 
 不需修改任何 Python 程式碼。
+
+---
+
+## 未來考慮：品質參數
+
+以下 Midjourney 參數可進一步提升輸出細節，待評估後加入 `fixed_suffix`：
+
+| 參數 | 說明 | 預設 | 建議值 | 備註 |
+|---|---|---|---|---|
+| `--q 2` | GPU 渲染時間加倍，提升細節精緻度 | 1 | 2 | 消耗 2x GPU 額度 |
+| `--no extra fingers, malformed hands, fused fingers` | 負面提示，排除常見畸形 | 無 | 加入 | 可減少手部異常 |
+| `--chaos N` | 結果多樣性（0-100） | 0 | 視需求 | 較高值出圖差異大 |

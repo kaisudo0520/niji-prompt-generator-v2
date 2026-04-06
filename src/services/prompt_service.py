@@ -58,6 +58,13 @@ class PromptService:
             else "Choose an appropriate color palette."
         )
 
+        title_ref = request.user_inputs.get("title_reference", "")
+        title_line = (
+            f'Title/song/album reference (use as creative direction): "{title_ref}"'
+            if title_ref
+            else ""
+        )
+
         lines = [
             f'  "{f.key}": ""  // {f.hint}'
             if f.hint
@@ -66,11 +73,17 @@ class PromptService:
         ]
         field_keys = ",\n".join(lines)
 
+        header_lines = [f'User description: "{request.user_description}"']
+        if title_line:
+            header_lines.append(title_line)
+        header_lines.append(palette_line)
+
+        header = "\n".join(header_lines)
+
         return (
-            f'User description: "{request.user_description}"\n'
-            f"{palette_line}\n\n"
-            "Fill in the following fields in English "
-            "(comma-separated phrases, Midjourney syntax):\n"
+            f"{header}\n\n"
+            "Fill in the following fields in concise English "
+            "(1-3 short phrases each, Midjourney syntax — less is more):\n"
             f"{{\n{field_keys}\n}}"
         )
 

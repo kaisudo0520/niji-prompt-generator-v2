@@ -46,8 +46,21 @@ class CategorySelectInput(BaseModel):
     empty_label: str = "讓 LLM 決定"
 
 
+class TextInput(BaseModel):
+    type: Literal["text_input"]
+    id: str
+    label: str
+    placeholder: str = ""
+    required: bool = False
+
+
 UserInputDef = Annotated[
-    Union[MultiSelectCardsInput, SingleSelectPillsInput, CategorySelectInput],
+    Union[
+        MultiSelectCardsInput,
+        SingleSelectPillsInput,
+        CategorySelectInput,
+        TextInput,
+    ],
     Field(discriminator="type"),
 ]
 

@@ -155,11 +155,23 @@ class MainWindow(QMainWindow):
         self._vsplit = QSplitter(Qt.Orientation.Vertical)
         self._vsplit.setHandleWidth(1)
 
-        # Row 1: Description | Artists
+        # Row 1: Description (+ title ref) | Artists
         row1 = QSplitter(Qt.Orientation.Horizontal)
         row1.setHandleWidth(1)
+
+        left_col = QWidget()
+        left_layout = QVBoxLayout(left_col)
+        left_layout.setContentsMargins(0, 0, 0, 0)
+        left_layout.setSpacing(0)
         self._description_panel = DescriptionPanel()
-        row1.addWidget(self._description_panel)
+        left_layout.addWidget(self._description_panel, 1)
+
+        self._title_slot = QWidget()
+        self._title_slot_layout = QHBoxLayout(self._title_slot)
+        self._title_slot_layout.setContentsMargins(24, 0, 16, 12)
+        left_layout.addWidget(self._title_slot)
+
+        row1.addWidget(left_col)
         self._artists_scroll, self._artists_inner = self._make_scroll_section()
         row1.addWidget(self._artists_scroll)
         row1.setSizes([560, 700])
@@ -246,6 +258,7 @@ class MainWindow(QMainWindow):
 
     def _rebuild_input_layout(self) -> None:
         self._place_widget(self._artists_inner, self._input_ctrl.get_widget("artists"))
+        self._place_in_slot(self._title_slot_layout, self._input_ctrl.get_widget("title_reference"))
         self._place_in_slot(self._ratio_slot_layout, self._input_ctrl.get_widget("aspect_ratio"))
         self._place_in_slot(self._color_slot_layout, self._input_ctrl.get_widget("color_palette"))
 

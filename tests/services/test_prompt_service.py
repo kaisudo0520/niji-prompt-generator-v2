@@ -125,8 +125,8 @@ def test_user_message_includes_field_hints(niji_template, mock_llm_response, bas
     svc.generate(basic_request)
 
     user_message = llm_svc.complete.call_args[0][1]
-    # The 'lighting' field has hint: "e.g. golden hour backlight, rim lighting, volumetric rays"
-    assert "golden hour backlight" in user_message
+    # The 'lighting' field has hint containing "warm golden backlight"
+    assert "warm golden backlight" in user_message
 
 
 def test_user_message_omits_hint_comment_when_empty(mock_llm_response, basic_request):

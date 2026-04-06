@@ -10,6 +10,7 @@ from src.models.template import (
     MultiSelectCardsInput,
     SingleSelectPillsInput,
     CategorySelectInput,
+    TextInput,
 )
 
 TEMPLATES_DIR = Path(__file__).parent.parent.parent / "templates"
@@ -18,7 +19,7 @@ TEMPLATES_DIR = Path(__file__).parent.parent.parent / "templates"
 def test_niji_template_loads_from_json(niji_template):
     assert niji_template.id == "niji-anime"
     assert niji_template.name == "Niji Anime"
-    assert len(niji_template.user_inputs) == 3
+    assert len(niji_template.user_inputs) == 4
     assert len(niji_template.fields) == 8
 
 
@@ -26,7 +27,8 @@ def test_user_inputs_discriminator_resolves_correctly(niji_template):
     inputs = niji_template.user_inputs
     assert isinstance(inputs[0], MultiSelectCardsInput)
     assert isinstance(inputs[1], SingleSelectPillsInput)
-    assert isinstance(inputs[2], CategorySelectInput)
+    assert isinstance(inputs[2], TextInput)
+    assert isinstance(inputs[3], CategorySelectInput)
 
 
 def test_multi_select_cards_has_correct_artists(niji_template):
@@ -42,8 +44,14 @@ def test_aspect_ratio_default_is_9_16(niji_template):
     assert ratio_input.default == "9:16"
 
 
+def test_title_reference_is_optional(niji_template):
+    title_input = niji_template.user_inputs[2]
+    assert isinstance(title_input, TextInput)
+    assert title_input.required is False
+
+
 def test_color_palette_allows_empty(niji_template):
-    palette_input = niji_template.user_inputs[2]
+    palette_input = niji_template.user_inputs[3]
     assert palette_input.allow_empty is True
 
 

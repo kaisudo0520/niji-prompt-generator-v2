@@ -8,7 +8,11 @@ from typing import Any
 from PySide6.QtWidgets import QWidget
 
 from src.ui.widgets.inputs.multi_select_cards import MultiSelectCards
-from src.ui.widgets.inputs.compact_selects import CompactSingleSelect, CompactCategorySelect
+from src.ui.widgets.inputs.compact_selects import (
+    CompactSingleSelect,
+    CompactCategorySelect,
+    CompactTextInput,
+)
 
 
 class InputController:
@@ -51,5 +55,7 @@ class InputController:
                 return CompactSingleSelect(input_def)
             case "category_select":
                 return CompactCategorySelect(input_def)
+            case "text_input":
+                return CompactTextInput(input_def)
             case _:
                 return None
