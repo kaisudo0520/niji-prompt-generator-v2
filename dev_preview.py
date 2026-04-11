@@ -100,6 +100,7 @@ NIJI_TEMPLATE = Template(
                 Opt("Anmi",         "Anmi",                    "鮮豔配色、活潑表情、動感構圖"),
                 Opt("Lake",         "Lake",                    "精緻珠寶感、光澤質感、華麗服裝"),
                 Opt("Liduke",       "Liduke",                  "獨特眼神、神秘氛圍、複雜細節"),
+                Opt("Kuroboshi Kouhaku", "黑星紅白",           "柔和水彩、異國情調、空靈透明感"),
             ],
         ),
         Pills(

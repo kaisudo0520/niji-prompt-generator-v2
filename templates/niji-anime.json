@@ -14,7 +14,8 @@
         { "value": "kousaki rui",  "label": "kousaki rui（光崎琉衣）",  "description": "柔和粉彩、少女感、花卉裝飾" },
         { "value": "Anmi",         "label": "Anmi",                    "description": "鮮豔配色、活潑表情、動感構圖" },
         { "value": "Lake",         "label": "Lake",                    "description": "精緻珠寶感、光澤質感、華麗服裝" },
-        { "value": "Liduke",       "label": "Liduke",                  "description": "獨特眼神、神秘氛圍、複雜細節" }
+        { "value": "Liduke",       "label": "Liduke",                  "description": "獨特眼神、神秘氛圍、複雜細節" },
+        { "value": "Kuroboshi Kouhaku", "label": "黑星紅白",           "description": "柔和水彩、異國情調、空靈透明感" }
       ]
     },
     {
@@ -48,9 +49,7 @@
           "label": "夢幻 / 華麗",
           "options": [
             { "value": "pink and gold",          "label": "粉與金" },
-            { "value": "rainbow-colored petals", "label": "彩虹色花瓣" },
-            { "value": "pearl white and rose pink", "label": "珍珠白與玫瑰粉" },
-            { "value": "champagne and lavender",    "label": "香檳與薰衣草" }
+            { "value": "rainbow-colored petals", "label": "彩虹色花瓣" }
           ]
         },
         {
@@ -58,9 +57,7 @@
           "options": [
             { "value": "dark gray and light black", "label": "深灰與淺黑" },
             { "value": "dark bronze and red",       "label": "深古銅與紅" },
-            { "value": "stark black and white",     "label": "強烈的黑白" },
-            { "value": "deep indigo and silver",    "label": "深靛與銀" },
-            { "value": "midnight purple and crimson","label": "午夜紫與暗紅" }
+            { "value": "stark black and white",     "label": "強烈的黑白" }
           ]
         },
         {
@@ -68,24 +65,7 @@
           "options": [
             { "value": "light bronze and blue", "label": "淺古銅與藍" },
             { "value": "dark orange and white", "label": "深橘與白"   },
-            { "value": "dark gray and red",     "label": "深灰與紅"   },
-            { "value": "faded teal and ash",    "label": "褪色青與灰" }
-          ]
-        },
-        {
-          "label": "清新 / 柔和",
-          "options": [
-            { "value": "mint green and cream",   "label": "薄荷綠與奶油" },
-            { "value": "sky blue and peach",     "label": "天空藍與蜜桃" },
-            { "value": "soft lilac and white",   "label": "淡紫丁香與白" }
-          ]
-        },
-        {
-          "label": "熱血 / 鮮豔",
-          "options": [
-            { "value": "crimson and gold",           "label": "深紅與金" },
-            { "value": "electric blue and magenta",  "label": "電藍與洋紅" },
-            { "value": "sunset orange and violet",   "label": "落日橘與紫" }
+            { "value": "dark gray and red",     "label": "深灰與紅"   }
           ]
         }
       ]
@@ -102,6 +82,6 @@
     { "key": "composition",            "label": "構圖修飾",         "hint": "One framing guide: e.g. shallow depth of field, cinematic framing" }
   ],
   "system_prompt": "You are an expert Midjourney prompt engineer specializing in anime (niji) style.\nTranslate the user's description into English prompt segments using Midjourney syntax.\n\nCore principle: CHARACTER DETAIL + COMPOSITIONAL BREATHING ROOM.\n\nDETAILED fields (2-4 vivid phrases OK):\n- character_and_shot: character identity, count, shot type\n- outfit_and_accessories: clothing, accessories, distinctive features — be descriptive\n- hair_and_eyes: hair style/color, eye color/traits — be specific\n\nCONCISE fields (1-2 clear phrases — give direction, not a shot list):\n- expression_and_action: ONE expression + ONE action/pose. Clear and intentional, but do NOT pile on extras.\n  GOOD: \"confident smirk, resting chin on hand\"  BAD: \"smirking, holding a sniper rifle, relaxed posture, looking at viewer\"\n- color_palette: 1-2 color tones that set the mood\n- lighting: ONE clear lighting direction with intent (e.g. \"warm golden backlight\" not just \"backlight\")\n- scene_and_atmosphere: ONE setting + mood phrase. Evocative but not exhaustive.\n  GOOD: \"neon-lit rooftop at night\"  BAD: \"modern rooftop at night, neon city lights background, floating glowing particles\"\n- composition: ONE composition phrase that guides framing\n  GOOD: \"shallow depth of field\"  BAD: \"high contrast, sharp focus, rule of thirds\"\n\nAdapt creative freedom to the user's input:\n- Vague description → invent a cohesive character look, but keep non-character fields sparse.\n- Detailed description → faithfully translate character specifics; still keep composition/scene/action minimal.\n- If a title/song/album reference is provided, use it as creative direction — let the mood, aesthetic, and atmosphere of that work subtly influence your choices (color, lighting, scene) without literally describing the source material.\n\nNever repeat the user's raw input verbatim — transform into Midjourney-compatible English.\n\nOutput ONLY valid JSON with the exact keys listed, no other text.",
-  "output_template": "{character_and_shot}, {outfit_and_accessories}, {hair_and_eyes}, {expression_and_action}, {color_palette}, {lighting}, luminous brushwork, use of light and shadow, detailed hands, {scene_and_atmosphere}, {artist_ref}, official art, anime aesthetic, {composition}",
+  "output_template": "{character_and_shot}, {outfit_and_accessories}, {hair_and_eyes}, {expression_and_action}, {color_palette}, {lighting}, luminous brushwork, use of light and shadow, {scene_and_atmosphere}, {artist_ref}, official art, anime aesthetic, {composition}",
   "fixed_suffix": "--ar {aspect_ratio} --niji 7 --s 750"
 }

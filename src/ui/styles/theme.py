@@ -52,7 +52,8 @@ ARTIST_COLORS: dict[str, str] = {
     "kousaki rui":  "#E8A0C0",
     "Anmi":         "#80C4A0",
     "Lake":         "#A090E0",
-    "Liduke":       "#8090B0",
+    "Liduke":            "#8090B0",
+    "Kuroboshi Kouhaku": "#D0C0A0",
 }
 
 # ─────────────────────────────────────────────
@@ -63,27 +64,14 @@ COLOR_PREVIEW_MAP: dict[str, str] = {
     # 夢幻 / 華麗
     "pink and gold":              "#D4957A",
     "rainbow-colored petals":     "#B090C8",
-    "pearl white and rose pink":  "#E8B0C0",
-    "champagne and lavender":     "#C0A8D0",
     # 神祕 / 暗黑
     "dark gray and light black":  "#484858",
     "dark bronze and red":        "#8B4A3A",
     "stark black and white":      "#909090",
-    "deep indigo and silver":     "#4A5080",
-    "midnight purple and crimson":"#6A2848",
     # 憂鬱 / 氣氛
     "light bronze and blue":      "#5A8090",
     "dark orange and white":      "#C86020",
     "dark gray and red":          "#784050",
-    "faded teal and ash":         "#6A8888",
-    # 清新 / 柔和
-    "mint green and cream":       "#88C8A8",
-    "sky blue and peach":         "#80B0D0",
-    "soft lilac and white":       "#B8A0D0",
-    # 熱血 / 鮮豔
-    "crimson and gold":           "#C83030",
-    "electric blue and magenta":  "#5060E0",
-    "sunset orange and violet":   "#D07030",
 }
 
 
